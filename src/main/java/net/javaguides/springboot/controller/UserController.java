@@ -1,5 +1,6 @@
 package net.javaguides.springboot.controller;
 
+import jakarta.validation.Valid;
 import net.javaguides.springboot.dto.UserDto;
 import net.javaguides.springboot.exception.ErrorDetails;
 import net.javaguides.springboot.exception.ResourceNotFoundException;
@@ -20,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) throws ResourceNotFoundException {
+    public ResponseEntity<UserDto> createUser(@RequestBody @Valid UserDto userDto) throws ResourceNotFoundException {
         UserDto createdUser = userService.createUser(userDto);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId, @RequestBody UserDto userDto) throws ResourceNotFoundException {
+    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userId, @RequestBody @Valid UserDto userDto) throws ResourceNotFoundException {
         userDto.setId(userId);
         UserDto updatedUser = userService.updateUser(userDto);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);

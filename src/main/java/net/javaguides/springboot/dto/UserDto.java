@@ -1,9 +1,17 @@
 package net.javaguides.springboot.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class UserDto {
     private Long id;
+    @NotEmpty(message = "user first name must not be empty or null")
     private String firstName;
+    @NotEmpty(message = "user last name must not be empty or null")
     private String lastName;
+
+    @NotEmpty(message = "user email address must not be empty or null")
+    @Email(message = "please enter a valid email address")
     private String email;
 
     public UserDto() {
