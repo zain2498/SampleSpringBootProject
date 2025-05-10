@@ -1,5 +1,6 @@
 package net.javaguides.springboot.service.impl;
 
+import net.javaguides.springboot.exception.EmailAlreadyExistException;
 import net.javaguides.springboot.mapper.UserMapper;
 import net.javaguides.springboot.dto.UserDto;
 import net.javaguides.springboot.entity.User;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto createUser(UserDto userDto) throws ResourceNotFoundException {
+
+        Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
+        if (optionalUser.isPresent()) {
+            throw new EmailAlreadyExistException("Email Already Exist ");
+        }
         //convert userDto to User
         User user = UserMapper.mapToUser(userDto);
         //then save the user object into db
@@ -45,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(UserDto userDto) throws ResourceNotFoundException {
         User existingUser = userRepository.findById(userDto.getId()).orElseThrow(
-                () -> new ResourceNotFoundException("User","id", userDto.getId())
+                () -> new ResourceNotFoundException("User", "id", userDto.getId())
         );
         existingUser.setFirstName(userDto.getFirstName());
         existingUser.setLastName(userDto.getLastName());
