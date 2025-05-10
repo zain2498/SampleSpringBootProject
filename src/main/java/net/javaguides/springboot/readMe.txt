@@ -48,8 +48,26 @@ and then call this end point from postman with payload none
 http://localhost:9090/actuator/shutdown and this is how our application shut down.
 
 
-                                            
+                                              SPRINGDoc Java Library
+SpringDoc-openapi java library helps to automate the generation of API documentation using spring boot projects.
+springDoc-openapi java library provide integration between spring boot and swagger-ui
+Automatically generates the documentation in HTML/YAML and JSON format APIs.
 
+in order to add this dependency we need to go to this url below:
+https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui/2.8.6
+
+<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.8.6</version>
+</dependency>
+
+
+use this annotation to customize the swagger-ui to add details of our spring boot application
+@OpenAPIDefinition
+and below is the url to access the swagger-ui documentation for our spring boot project:
+http://localhost:9090/swagger-ui/index.html
 
 
 

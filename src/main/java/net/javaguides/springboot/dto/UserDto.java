@@ -1,15 +1,23 @@
 package net.javaguides.springboot.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
+@Schema(
+        description = "USER DTO Model Information"
+)
 public class UserDto {
     private Long id;
+
+    @Schema(description = "User First Name")
     @NotEmpty(message = "user first name must not be empty or null")
     private String firstName;
+    @Schema(description = "User Last Name")
     @NotEmpty(message = "user last name must not be empty or null")
     private String lastName;
 
+    @Schema(description = "User Email Address")
     @NotEmpty(message = "user email address must not be empty or null")
     @Email(message = "please enter a valid email address")
     private String email;
